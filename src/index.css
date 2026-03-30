@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter", "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  background: #d6d8de;
+}
+
+:root.dark {
+  color: #e2e8f0;
+  background: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #d9dbe1 0%, #cfd3db 100%);
+  color: #0f172a;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+:root.dark body {
+  background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+  color: #e2e8f0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+.clay {
+  border-radius: 1.25rem;
+  background: #eef1f7;
+  box-shadow: 11px 11px 26px rgba(15, 23, 42, 0.11), -10px -10px 22px rgba(255, 255, 255, 0.78);
+}
+
+.app-frame {
+  background: #e8e9ef;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.7), 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+:root.dark .app-frame {
+  background: #111827;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.04), 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.clay-sidebar {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #f0f2f7;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8), 8px 8px 18px rgba(15, 23, 42, 0.08);
+}
+:root.dark .clay-sidebar {
+  background: #1f2937;
+}
+
+.icon-btn {
+  border: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.12);
+}
+:root.dark .icon-btn {
+  background: #1f2937;
+  color: #e2e8f0;
+}
+
+.clay-card {
+  border-radius: 1.2rem;
+  background: #eff2f7;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.85), 8px 8px 18px rgba(15, 23, 42, 0.08);
+}
+:root.dark .clay-card {
+  background: #1f2937;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.04), 8px 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.media-card {
+  min-height: 140px;
+  border-radius: 1rem;
+  background: linear-gradient(130deg, #f7f9fc 0%, #dde3ec 100%);
+  display: grid;
+  place-items: center;
+  color: #1f2937;
+}
+:root.dark .media-card {
+  background: linear-gradient(130deg, #1f2937 0%, #111827 100%);
+  color: #e2e8f0;
+}
+
+:root.dark .text-slate-900,
+:root.dark .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+:root.dark .text-slate-700,
+:root.dark .text-slate-600,
+:root.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+:root.dark .bg-white,
+:root.dark .bg-white\/70,
+:root.dark .bg-white\/75,
+:root.dark .bg-white\/80 {
+  background-color: rgba(31, 41, 55, 0.9) !important;
+}
+:root.dark .bg-\[\#ebedf3\] {
+  background-color: #0f172a !important;
+}
+
+:root.theme-animating body,
+:root.theme-animating .app-frame,
+:root.theme-animating .clay-sidebar,
+:root.theme-animating .clay-card,
+:root.theme-animating .icon-btn,
+:root.theme-animating .media-card,
+:root.theme-animating [class*="text-slate-"],
+:root.theme-animating [class*="bg-"] {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.theme-animating body,
+  :root.theme-animating .app-frame,
+  :root.theme-animating .clay-sidebar,
+  :root.theme-animating .clay-card,
+  :root.theme-animating .icon-btn,
+  :root.theme-animating .media-card,
+  :root.theme-animating [class*="text-slate-"],
+  :root.theme-animating [class*="bg-"] {
+    transition: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .clay-sidebar {
+    min-height: auto;
+  }
+}
