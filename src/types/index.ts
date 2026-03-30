@@ -16,7 +16,20 @@ export type SplitRequest = {
   sessionDurationMinutes: number;
   daysPerWeek: number;
   planDurationWeeks: number;
+  splitSystem: SplitSystem;
 };
+
+export type SplitSystem =
+  | "full_body_split"
+  | "upper_lower_split"
+  | "push_pull_split"
+  | "ppl_split"
+  | "body_part_split"
+  | "arnold_split"
+  | "phul_split"
+  | "phat_split"
+  | "torso_limbs_split"
+  | "hybrid_split";
 
 export type ExerciseGuide = {
   name: string;
@@ -85,6 +98,8 @@ export type PlanGuide = {
   day: string;
   name: string;
   instruction: string;
+  sets: string;
+  reps: string;
 };
 
 export type UserRole = "SUPER_ADMIN" | "USER";

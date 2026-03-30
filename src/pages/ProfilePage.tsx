@@ -170,9 +170,7 @@ export default function ProfilePage() {
             <p className="text-center text-xs text-slate-600 dark:text-zinc-500">
               {selectedAvatarFile ? (
                 <span className="font-medium text-indigo-600 dark:text-indigo-400">New photo selected — save to apply.</span>
-              ) : (
-                "JPG or PNG, up to 5MB."
-              )}
+              ) : null}
             </p>
           </div>
         </Card>

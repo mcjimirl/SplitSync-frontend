@@ -24,7 +24,21 @@ const initialPayload: SplitRequest = {
   sessionDurationMinutes: 60,
   daysPerWeek: 4,
   planDurationWeeks: 4,
+  splitSystem: "upper_lower_split",
 };
+
+const SPLITS: Array<{ value: SplitRequest["splitSystem"]; label: string }> = [
+  { value: "full_body_split", label: "Full Body Split" },
+  { value: "upper_lower_split", label: "Upper / Lower Split" },
+  { value: "push_pull_split", label: "Push / Pull Split" },
+  { value: "ppl_split", label: "Push / Pull / Legs (PPL)" },
+  { value: "body_part_split", label: "Body Part Split (Bro Split)" },
+  { value: "arnold_split", label: "Arnold Split" },
+  { value: "phul_split", label: "PHUL (Power Hypertrophy Upper/Lower)" },
+  { value: "phat_split", label: "PHAT (Power Hypertrophy Adaptive Training)" },
+  { value: "torso_limbs_split", label: "Torso / Limbs Split" },
+  { value: "hybrid_split", label: "Hybrid (Custom)" },
+];
 
 export default function GenerateSplitPage() {
   const { token, user } = useAuth();
@@ -173,6 +187,25 @@ export default function GenerateSplitPage() {
             <option value="strength">Strength</option>
             <option value="hypertrophy">Hypertrophy</option>
             <option value="fat_loss">Fat Loss</option>
+          </Select>
+        </label>
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
+          Split Structure
+          <Select
+            className="mt-1"
+            value={payload.splitSystem}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                splitSystem: e.target.value as SplitRequest["splitSystem"],
+              }))
+            }
+          >
+            {SPLITS.map((split) => (
+              <option key={split.value} value={split.value}>
+                {split.label}
+              </option>
+            ))}
           </Select>
         </label>
         <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
