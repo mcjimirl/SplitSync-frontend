@@ -216,6 +216,9 @@ export default function WorkoutLibraryPage() {
                                 )}
                               </div>
                               <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{guide.instruction}</p>
+                              <p className="mt-2 text-xs font-semibold text-slate-700">
+                                {guide.sets} sets · {guide.reps} reps
+                              </p>
                               <p className="mt-3 text-xs font-bold uppercase tracking-wide text-indigo-600 opacity-80 group-hover:opacity-100">
                                 Open guide →
                               </p>
@@ -271,6 +274,10 @@ export default function WorkoutLibraryPage() {
                     </span>
                   </div>
                 )}
+                <p className="text-sm text-slate-600">
+                  <span className="font-semibold text-slate-700">Sets/reps:</span> {selectedGuide.sets} sets ·{" "}
+                  {selectedGuide.reps} reps
+                </p>
                 <p className="rounded-xl bg-slate-50 p-3 text-sm text-slate-700">
                   <span className="font-semibold text-slate-900">Coach cue:</span> {selectedGuide.instruction}
                 </p>
