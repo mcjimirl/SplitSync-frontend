@@ -6,7 +6,7 @@ export default function Card({ children, className = "" }: { children: ReactNode
     <motion.article
       whileHover={{ y: -2 }}
       transition={{ duration: 0.16 }}
-      className={`clay-card p-4 md:p-5 ${className}`}
+      className={`clay-card p-4 text-slate-900 dark:text-zinc-100 md:p-5 ${className}`}
     >
       {children}
     </motion.article>

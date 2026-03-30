@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import EmptyState from "../components/ui/EmptyState";
@@ -8,8 +8,7 @@ import Modal from "../components/ui/Modal";
 import Select from "../components/ui/Select";
 import StateMessage from "../components/ui/StateMessage";
 import { useAuth } from "../features/auth/AuthContext";
-import { generateSplit } from "../services/workoutService";
-import { getMyPlans } from "../services/workoutService";
+import { generateSplit, getMyPlans } from "../services/workoutService";
 import type { SplitRequest, WeeklyPlan } from "../types";
 
 const initialPayload: SplitRequest = {
@@ -66,7 +65,9 @@ export default function GenerateSplitPage() {
     }
     setLoading(true);
     try {
-      const generated = await generateSplit(token, payload, { replaceExisting });
+      const generated = await generateSplit(token, payload, {
+        replaceExisting,
+      });
       setPlan(generated);
       setSuccess("Plan generated successfully.");
       setShowGeneratedModal(true);
@@ -102,75 +103,150 @@ export default function GenerateSplitPage() {
   }
 
   return (
-    <section className="grid gap-4 xl:grid-cols-2">
+    <section className="grid gap-4 text-slate-900 dark:text-zinc-100 xl:grid-cols-2">
       <Card className="space-y-3">
-        <h1 className="text-2xl font-semibold text-slate-900">Body Profile Form</h1>
-        <label className="block text-sm font-medium">
+        <h1 className="text-2xl font-semibold text-slate-900 dark:text-zinc-50">Body Profile Form</h1>
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Age
-          <Input type="number" className="mt-1" value={payload.age} onChange={(e) => setPayload((p) => ({ ...p, age: Number(e.target.value) }))} />
+          <Input
+            type="number"
+            className="mt-1"
+            value={payload.age}
+            onChange={(e) =>
+              setPayload((p) => ({ ...p, age: Number(e.target.value) }))
+            }
+          />
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Sex
-          <Select className="mt-1" value={payload.sex} onChange={(e) => setPayload((p) => ({ ...p, sex: e.target.value as SplitRequest["sex"] }))}>
+          <Select
+            className="mt-1"
+            value={payload.sex}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                sex: e.target.value as SplitRequest["sex"],
+              }))
+            }
+          >
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </Select>
         </label>
         <div className="grid gap-3 sm:grid-cols-2">
-          <label className="block text-sm font-medium">
+          <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
             Height (cm)
-            <Input type="number" className="mt-1" value={payload.heightCm} onChange={(e) => setPayload((p) => ({ ...p, heightCm: Number(e.target.value) }))} />
+            <Input
+              type="number"
+              className="mt-1"
+              value={payload.heightCm}
+              onChange={(e) =>
+                setPayload((p) => ({ ...p, heightCm: Number(e.target.value) }))
+              }
+            />
           </label>
-          <label className="block text-sm font-medium">
+          <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
             Weight (kg)
-            <Input type="number" className="mt-1" value={payload.weightKg} onChange={(e) => setPayload((p) => ({ ...p, weightKg: Number(e.target.value) }))} />
+            <Input
+              type="number"
+              className="mt-1"
+              value={payload.weightKg}
+              onChange={(e) =>
+                setPayload((p) => ({ ...p, weightKg: Number(e.target.value) }))
+              }
+            />
           </label>
         </div>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Goal
-          <Select className="mt-1" value={payload.goal} onChange={(e) => setPayload((p) => ({ ...p, goal: e.target.value as SplitRequest["goal"] }))}>
+          <Select
+            className="mt-1"
+            value={payload.goal}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                goal: e.target.value as SplitRequest["goal"],
+              }))
+            }
+          >
             <option value="strength">Strength</option>
             <option value="hypertrophy">Hypertrophy</option>
             <option value="fat_loss">Fat Loss</option>
           </Select>
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Activity Level
-          <Select className="mt-1" value={payload.activityLevel} onChange={(e) => setPayload((p) => ({ ...p, activityLevel: e.target.value as SplitRequest["activityLevel"] }))}>
+          <Select
+            className="mt-1"
+            value={payload.activityLevel}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                activityLevel: e.target.value as SplitRequest["activityLevel"],
+              }))
+            }
+          >
             <option value="sedentary">Sedentary</option>
             <option value="lightly_active">Lightly Active</option>
             <option value="moderately_active">Moderately Active</option>
             <option value="very_active">Very Active</option>
           </Select>
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Available Equipment
-          <Select className="mt-1" value={payload.equipmentAccess} onChange={(e) => setPayload((p) => ({ ...p, equipmentAccess: e.target.value as SplitRequest["equipmentAccess"] }))}>
+          <Select
+            className="mt-1"
+            value={payload.equipmentAccess}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                equipmentAccess: e.target
+                  .value as SplitRequest["equipmentAccess"],
+              }))
+            }
+          >
             <option value="full_gym">Full Gym</option>
             <option value="dumbbells_only">Dumbbells Only</option>
             <option value="machines_only">Machines Only</option>
             <option value="bodyweight_only">Bodyweight Only</option>
           </Select>
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Session Duration (minutes)
           <Input
             type="number"
             className="mt-1"
             value={payload.sessionDurationMinutes}
-            onChange={(e) => setPayload((p) => ({ ...p, sessionDurationMinutes: Number(e.target.value) }))}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                sessionDurationMinutes: Number(e.target.value),
+              }))
+            }
           />
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Injuries / Limitations
-          <Input className="mt-1" value={payload.injuries} onChange={(e) => setPayload((p) => ({ ...p, injuries: e.target.value }))} />
+          <Input
+            className="mt-1"
+            value={payload.injuries}
+            onChange={(e) =>
+              setPayload((p) => ({ ...p, injuries: e.target.value }))
+            }
+          />
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Medical Notes
-          <Input className="mt-1" value={payload.medicalNotes} onChange={(e) => setPayload((p) => ({ ...p, medicalNotes: e.target.value }))} />
+          <Input
+            className="mt-1"
+            value={payload.medicalNotes}
+            onChange={(e) =>
+              setPayload((p) => ({ ...p, medicalNotes: e.target.value }))
+            }
+          />
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Days Per Week
           <Input
             type="number"
@@ -178,16 +254,23 @@ export default function GenerateSplitPage() {
             max={7}
             className="mt-1"
             value={payload.daysPerWeek}
-            onChange={(e) => setPayload((p) => ({ ...p, daysPerWeek: Number(e.target.value) }))}
+            onChange={(e) =>
+              setPayload((p) => ({ ...p, daysPerWeek: Number(e.target.value) }))
+            }
             error={daysError}
           />
         </label>
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium text-slate-800 dark:text-zinc-200">
           Program Duration (weeks)
           <Select
             className="mt-1"
             value={payload.planDurationWeeks}
-            onChange={(e) => setPayload((p) => ({ ...p, planDurationWeeks: Number(e.target.value) }))}
+            onChange={(e) =>
+              setPayload((p) => ({
+                ...p,
+                planDurationWeeks: Number(e.target.value),
+              }))
+            }
           >
             <option value={4}>4 weeks (1 month)</option>
             <option value={8}>8 weeks</option>
@@ -202,23 +285,41 @@ export default function GenerateSplitPage() {
       </Card>
 
       <Card>
-        <h2 className="text-lg font-semibold text-slate-900">{plan ? plan.title : "Your personalized weekly plan"}</h2>
+        <h2 className="text-lg font-semibold text-slate-900">
+          {plan ? plan.title : "Your personalized weekly plan"}
+        </h2>
         {!plan ? (
           <div className="mt-4">
-            <EmptyState title="No plan yet" description="Complete your body profile and generate a workout plan." />
+            <EmptyState
+              title="No plan yet"
+              description="Complete your body profile and generate a workout plan."
+            />
           </div>
         ) : (
-          <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} className="mt-3 space-y-3">
+          <motion.ul
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="mt-3 space-y-3"
+          >
             {plan.schedule.map((item) => (
-              <motion.li key={item.day} whileHover={{ x: 2 }} className="rounded-xl bg-white/80 p-3">
-                <p className="font-semibold">{item.day}</p>
-                <p className="text-sm text-slate-700">
+              <motion.li
+                key={item.day}
+                whileHover={{ x: 2 }}
+                className="rounded-xl border border-slate-200/90 bg-white/90 p-3 dark:border-white/10 dark:bg-white/5"
+              >
+                <p className="font-semibold text-slate-900 dark:text-zinc-100">{item.day}</p>
+                <p className="text-sm text-slate-800 dark:text-zinc-300">
                   {item.focus} - {item.estimatedDurationMinutes} min
                 </p>
                 <ul className="mt-2 space-y-1">
                   {item.exercises.map((exercise) => (
-                    <li key={`${item.day}-${exercise.name}`} className="text-xs text-slate-600">
-                      {exercise.name} ({exercise.sets}x{exercise.reps}) - {exercise.instruction}
+                    <li
+                      key={`${item.day}-${exercise.name}`}
+                      className="text-xs text-slate-700 dark:text-zinc-400"
+                    >
+                      {exercise.name} ({exercise.sets}x{exercise.reps}) -{" "}
+                      {exercise.instruction}
                     </li>
                   ))}
                 </ul>
@@ -227,11 +328,13 @@ export default function GenerateSplitPage() {
           </motion.ul>
         )}
         {plan && (
-          <div className="mt-4 rounded-xl bg-white/80 p-3">
-            <p className="text-sm font-semibold text-slate-800">Program timeline ({plan.planDurationWeeks} weeks)</p>
+          <div className="mt-4 rounded-xl border border-slate-200/90 bg-white/90 p-3 dark:border-white/10 dark:bg-white/5">
+            <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
+              Program timeline ({plan.planDurationWeeks} weeks)
+            </p>
             <ul className="mt-2 space-y-1">
               {plan.weeklyBlocks.map((block) => (
-                <li key={block.week} className="text-xs text-slate-600">
+                <li key={block.week} className="text-xs text-slate-700 dark:text-zinc-400">
                   Week {block.week}: {block.focus} - {block.notes}
                 </li>
               ))}
@@ -243,7 +346,9 @@ export default function GenerateSplitPage() {
         open={showGeneratedModal}
         title="Plan Generated"
         onClose={() => setShowGeneratedModal(false)}
-        actions={<Button onClick={() => setShowGeneratedModal(false)}>Great</Button>}
+        actions={
+          <Button onClick={() => setShowGeneratedModal(false)}>Great</Button>
+        }
       >
         Your personalized workout plan has been created and saved.
       </Modal>
@@ -253,14 +358,20 @@ export default function GenerateSplitPage() {
         onClose={() => setShowReplaceModal(false)}
         actions={
           <>
-            <Button variant="neutral" onClick={() => void executeGeneration(false)}>
+            <Button
+              variant="neutral"
+              onClick={() => void executeGeneration(false)}
+            >
               Keep old and create new
             </Button>
-            <Button onClick={() => void executeGeneration(true)}>Replace old plan</Button>
+            <Button onClick={() => void executeGeneration(true)}>
+              Replace old plan
+            </Button>
           </>
         }
       >
-        You can create another plan, or replace your previous saved plans with this new one.
+        You can create another plan, or replace your previous saved plans with
+        this new one.
       </Modal>
     </section>
   );
