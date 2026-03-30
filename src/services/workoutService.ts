@@ -48,6 +48,10 @@ export async function markAttendance(
   return data.attendance;
 }
 
+export async function deleteAttendance(token: string, planId: string, date: string): Promise<void> {
+  await api.delete(`/scheduler/attendance?planId=${encodeURIComponent(planId)}&date=${encodeURIComponent(date)}`, authHeader(token));
+}
+
 export async function getExerciseGuides(token: string): Promise<PlanGuide[]> {
   const { data } = await api.get<{ guides: PlanGuide[] }>("/workouts/guides", authHeader(token));
   return data.guides;
